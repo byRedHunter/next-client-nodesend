@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
 import Layout from '../components/Layout'
+import authContext from '../context/auth/authContext'
+import Alert from '../components/Alert'
 
 const Register = () => {
+	// auth state
+	const authState = useContext(authContext)
+	const { message, registerUser } = authState
+
 	// formulario y validacion con formik y yup
 	const formik = useFormik({
 		initialValues: {
@@ -22,7 +28,7 @@ const Register = () => {
 				.min(8, 'La contraseña debe de contener al menos 8 caracteres.'),
 		}),
 		onSubmit: (values) => {
-			console.log('enviar datos del formulario')
+			registerUser(values)
 		},
 	})
 	const { name, email, password } = formik.values
@@ -30,11 +36,13 @@ const Register = () => {
 	return (
 		<Layout>
 			<div className='md:w-4/5 xl:w-3/5 mx-auto'>
-				<h2 className='text-4xl font-sans font-bold text-gray-800 text-center my-4'>
+				<h2 className='text-4xl font-sans font-bold text-red-400 text-center my-4'>
 					Crear Cuenta
 				</h2>
 
-				<div className='flex justify-center mt-5'>
+				{message && <Alert />}
+
+				<div className='flex justify-center mt-10'>
 					<div className='max-w-lg w-full'>
 						<form
 							className='bg-white rounded shadow-md px-8 pt-6 pb-8 mb-4'

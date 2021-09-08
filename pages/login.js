@@ -26,11 +26,11 @@ const Login = () => {
 	return (
 		<Layout>
 			<div className='md:w-4/5 xl:w-3/5 mx-auto'>
-				<h2 className='text-4xl font-sans font-bold text-gray-800 text-center my-4'>
+				<h2 className='text-4xl font-sans font-bold text-red-400 text-center my-4'>
 					Iniciar Sesión
 				</h2>
 
-				<div className='flex justify-center mt-5'>
+				<div className='flex justify-center mt-10'>
 					<div className='max-w-lg w-full'>
 						<form
 							className='bg-white rounded shadow-md px-8 pt-6 pb-8 mb-4'

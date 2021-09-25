@@ -1,9 +1,8 @@
-import React, { useContext } from 'react'
-import authContext from '../context/auth/authContext'
+import React from 'react'
+import { useAuthState } from '../zustand/authStore'
 
 const Alert = () => {
-	const stateAuth = useContext(authContext)
-	const { message } = stateAuth
+	const { message } = useAuthState((state) => state)
 
 	return (
 		<div className='bg-purple-500 py-2 px-3 w-full my-3 max-w-lg text-center text-white mx-auto'>

@@ -1,15 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
 import Layout from '../components/Layout'
+import { useAuthState } from '../zustand/authStore'
+import Alert from '../components/Alert'
 
 const Login = () => {
+	const { message, token, loginUser } = useAuthState((state) => state)
+	const router = useRouter()
+
+	useEffect(() => {
+		if (token) router.push('/')
+	}, [token])
+
 	// formulario y validacion con formik y yup
 	const formik = useFormik({
 		initialValues: {
-			email: '',
-			password: '',
+			email: 'test@gmail.com',
+			password: 'testtest',
 		},
 		validationSchema: Yup.object({
 			email: Yup.string()
@@ -18,7 +28,7 @@ const Login = () => {
 			password: Yup.string().required('La contraseña es obligatorio'),
 		}),
 		onSubmit: (values) => {
-			console.log('enviar datos del formulario')
+			loginUser(values)
 		},
 	})
 	const { email, password } = formik.values
@@ -29,6 +39,8 @@ const Login = () => {
 				<h2 className='text-4xl font-sans font-bold text-red-400 text-center my-4'>
 					Iniciar Sesión
 				</h2>
+
+				{message && <Alert />}
 
 				<div className='flex justify-center mt-10'>
 					<div className='max-w-lg w-full'>

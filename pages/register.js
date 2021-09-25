@@ -1,15 +1,21 @@
-import React, { useContext } from 'react'
+import React, { useEffect } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
 import Layout from '../components/Layout'
-import authContext from '../context/auth/authContext'
 import Alert from '../components/Alert'
+import { useAuthState } from '../zustand/authStore'
+import { useRouter } from 'next/router'
 
 const Register = () => {
 	// auth state
-	const authState = useContext(authContext)
-	const { message, registerUser } = authState
+	const { message, token, registerUser } = useAuthState((state) => state)
+
+	const router = useRouter()
+
+	useEffect(() => {
+		if (token) router.push('/')
+	}, [token])
 
 	// formulario y validacion con formik y yup
 	const formik = useFormik({

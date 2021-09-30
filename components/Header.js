@@ -13,8 +13,8 @@ const Header = () => {
 				</h1>
 			</Link>
 
-			<ul className='mt-6 sm:mt-0 flex gap-4 items-center'>
-				{!authenticated && !user ? (
+			<div className='mt-6 sm:mt-0 flex gap-4 items-center'>
+				{!authenticated ? (
 					<>
 						<Link href='/login'>
 							<a className='px-5 py-2 rounded border border-purple-500'>
@@ -39,7 +39,7 @@ const Header = () => {
 						</button>
 					</>
 				)}
-			</ul>
+			</div>
 		</header>
 	)
 }

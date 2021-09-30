@@ -2,22 +2,7 @@ import create from 'zustand'
 import { combine, devtools, persist } from 'zustand/middleware'
 import clientAxios from '../config/axios'
 import tokenAuth from '../config/tokenAuth'
-
-const clearMessage = (set) => {
-	setTimeout(() => {
-		set((state) => ({
-			...state,
-			message: null,
-		}))
-	}, 4000)
-}
-
-const manageError = (set, message) => {
-	set((state) => ({
-		...state,
-		message,
-	}))
-}
+import { clearMessage, manageError } from '../utils/actionZustand'
 
 export const useAuthState = create(
 	devtools(

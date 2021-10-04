@@ -1,17 +1,28 @@
 import React from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useAuthState } from '../zustand/authStore'
+import { useApp } from '../zustand/useApp'
 
 const Header = () => {
+	const router = useRouter()
+
 	const { authenticated, user, clearSession } = useAuthState((state) => state)
+	const { clearState } = useApp((state) => state)
+
+	const redirectionar = () => {
+		router.push('/')
+		clearState()
+	}
 
 	return (
 		<header className='py-5 flex flex-col sm:flex-row items-center justify-between'>
-			<Link href='/'>
-				<h1 className='text-red-400 text-4xl font-bold'>
-					Node<span className='text-purple-500'>Send</span>
-				</h1>
-			</Link>
+			<h1
+				className='text-red-400 text-4xl font-bold cursor-pointer'
+				onClick={() => redirectionar()}
+			>
+				Node<span className='text-purple-500'>Send</span>
+			</h1>
 
 			<div className='mt-6 sm:mt-0 flex gap-4 items-center'>
 				{!authenticated ? (

@@ -64,6 +64,20 @@ export const useApp = create(
 						clearMessage(set)
 					}
 				},
+
+				clearState: () => {
+					set((state) => ({
+						...state,
+						message: null,
+						name: '',
+						originalName: '',
+						loading: false,
+						downloads: 1,
+						password: '',
+						author: null,
+						url: '',
+					}))
+				},
 			})
 		)
 	)

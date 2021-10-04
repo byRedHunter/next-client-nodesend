@@ -8,11 +8,11 @@ import { useApp } from '../zustand/useApp'
 import Alert from '../components/Alert'
 
 export default function Home() {
-	const { verifyUser } = useAuthState((state) => state)
+	const { verifyUser, token } = useAuthState((state) => state)
 	const { message, url } = useApp((state) => state)
 
 	useEffect(() => {
-		verifyUser()
+		if (token) verifyUser()
 	}, [])
 
 	return (

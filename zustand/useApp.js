@@ -78,6 +78,14 @@ export const useApp = create(
 						url: '',
 					}))
 				},
+
+				addPassword: (password) => {
+					set((state) => ({ ...state, password }))
+				},
+
+				addDownloads: (downloads) => {
+					set((state) => ({ ...state, downloads }))
+				},
 			})
 		)
 	)

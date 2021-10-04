@@ -2,6 +2,7 @@ import React, { useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { useAuthState } from '../zustand/authStore'
 import { useApp } from '../zustand/useApp'
+import FormActions from './FormActions'
 
 const Dropzone = () => {
 	const { showAlert, uploadFile, loading, createLink } = useApp(
@@ -53,6 +54,8 @@ const Dropzone = () => {
 					<h4 className='text-2xl font-bold text-center mb-4'>Archivos</h4>
 
 					<ul>{fileList}</ul>
+
+					{authenticated && <FormActions />}
 
 					{loading ? (
 						<p className='text-center text-2xl'>Subiendo Archivo...</p>
